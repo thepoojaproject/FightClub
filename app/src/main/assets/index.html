@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FIGHT CLUB</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#080808;
+    color:#ddd;
+    font-family:Arial,Helvetica,sans-serif;
+    overflow-x:hidden;
+}
+
+/* ================= GRAIN ================= */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:999;
+    opacity:.06;
+
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ================= LOGIN ================= */
+
+#loginPage{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #32130d 0%,
+            #0c0706 35%,
+            #030303 75%
+        );
+}
+
+#loginPage::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    opacity:.08;
+
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.login-box{
+    width:min(420px,90%);
+    position:relative;
+    z-index:2;
+    text-align:center;
+}
+
+.login-warning{
+    color:#a62f18;
+    font-size:10px;
+    letter-spacing:4px;
+    margin-bottom:30px;
+
+    animation:blink 2s infinite;
+}
+
+@keyframes blink{
+    0%,100%{
+        opacity:1;
+    }
+
+    50%{
+        opacity:.35;
+    }
+}
+
+.login-logo{
+    font-size:clamp(60px,13vw,100px);
+    line-height:.78;
+    font-weight:1000;
+    letter-spacing:-6px;
+    color:#eee;
+
+    text-shadow:
+        5px 5px 0 #641b10,
+        0 0 30px rgba(170,40,20,.25);
+}
+
+.login-subtitle{
+    color:#555;
+    font-size:10px;
+    letter-spacing:3px;
+    margin:30px 0;
+}
+
+.login-form{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.login-form input{
+    width:100%;
+    padding:17px;
+
+    background:#090909;
+    border:1px solid #282828;
+
+    color:#fff;
+    outline:none;
+
+    font-size:12px;
+    letter-spacing:1px;
+
+    transition:.3s;
+}
+
+.login-form input:focus{
+    border-color:#9f301a;
+    box-shadow:0 0 15px rgba(150,40,20,.15);
+}
+
+.login-form button{
+    margin-top:5px;
+    padding:18px;
+
+    border:0;
+    background:#9e2d17;
+    color:#fff;
+
+    cursor:pointer;
+
+    font-size:10px;
+    letter-spacing:4px;
+    font-weight:bold;
+
+    transition:.3s;
+}
+
+.login-form button:hover{
+    background:#c33a1c;
+    transform:translateY(-2px);
+}
+
+.login-note{
+    margin-top:25px;
+
+    color:#333;
+    font-size:9px;
+    letter-spacing:2px;
+    line-height:1.8;
+}
+
+.login-credit{
+    margin-top:30px;
+
+    color:#792718;
+    font-size:9px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+}
+
+/* ================= MAIN ================= */
+
+#mainPage{
+    display:none;
+}
+
+/* ================= NAV ================= */
+
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:100;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:25px 6%;
+
+    background:linear-gradient(
+        #050505,
+        transparent
+    );
+}
+
+.logo{
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:5px;
+    color:#fff;
+}
+
+nav a{
+    color:#777;
+    text-decoration:none;
+
+    margin-left:30px;
+
+    font-size:11px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#d33b1d;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:100vh;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    padding:100px 20px;
+
+    position:relative;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #34140d 0%,
+            #100806 30%,
+            #050505 70%
+        );
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+}
+
+.warning{
+    color:#a52d17;
+
+    font-size:11px;
+    letter-spacing:5px;
+
+    margin-bottom:35px;
+
+    animation:blink 2s infinite;
+}
+
+.hero h1{
+    font-size:clamp(70px,15vw,190px);
+
+    line-height:.75;
+
+    letter-spacing:-10px;
+
+    font-weight:1000;
+
+    color:#eee;
+
+    text-shadow:
+        7px 7px 0 #651b10,
+        0 0 40px rgba(180,40,15,.25);
+}
+
+.hero p{
+    margin:40px auto;
+
+    max-width:550px;
+
+    color:#777;
+
+    line-height:1.8;
+
+    font-size:13px;
+
+    letter-spacing:2px;
+}
+
+/* FIXED ENTER BUTTON */
+
+.enter{
+    display:inline-block;
+
+    padding:18px 35px;
+
+    border:1px solid #733020;
+
+    color:#ddd;
+
+    text-decoration:none;
+
+    font-size:11px;
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+
+    transition:
+        all .4s ease;
+}
+
+.enter:hover{
+    background:#a82d16;
+
+    border-color:#a82d16;
+
+    color:#fff;
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 10px 30px
+        rgba(160,40,20,.25);
+}
+
+.secret{
+    position:absolute;
+
+    bottom:30px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    font-size:9px;
+
+    color:#333;
+
+    letter-spacing:3px;
+}
+
+/* ================= SECTIONS ================= */
+
+section{
+    padding:110px 8%;
+    scroll-margin-top:70px;
+}
+
+.section-label{
+    color:#a52e18;
+
+    font-size:10px;
+
+    letter-spacing:5px;
+
+    margin-bottom:20px;
+}
+
+/* ================= MANIFESTO ================= */
+
+.manifesto{
+    min-height:85vh;
+
+    display:flex;
+
+    align-items:center;
+
+    background:#0b0b0b;
+}
+
+.manifesto-inner{
+    max-width:900px;
+}
+
+.manifesto h2{
+    font-size:clamp(45px,8vw,100px);
+
+    line-height:.9;
+
+    text-transform:uppercase;
+
+    color:#eee;
+}
+
+.manifesto h2 span{
+    color:#a72d17;
+}
+
+.manifesto p{
+    margin-top:40px;
+
+    max-width:650px;
+
+    color:#777;
+
+    line-height:2;
+}
+
+/* ================= RULES ================= */
+
+.rules{
+    background:#060606;
+}
+
+.rules h2{
+    font-size:clamp(40px,7vw,80px);
+
+    text-transform:uppercase;
+
+    margin-bottom:50px;
+}
+
+.rule-list{
+    max-width:850px;
+}
+
+.rule{
+    display:flex;
+
+    gap:35px;
+
+    align-items:center;
+
+    padding:28px 0;
+
+    border-bottom:1px solid #1d1d1d;
+
+    transition:.3s;
+}
+
+.rule:hover{
+    padding-left:12px;
+
+    border-color:#682516;
+}
+
+.rule-number{
+    color:#a52e18;
+
+    font-size:12px;
+
+    letter-spacing:2px;
+
+    min-width:70px;
+}
+
+.rule-text{
+    font-size:clamp(18px,3vw,28px);
+
+    text-transform:uppercase;
+
+    font-weight:bold;
+}
+
+/* ================= MESSAGE ================= */
+
+.message{
+    min-height:80vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    background:
+        radial-gradient(
+            circle,
+            #32140e,
+            #070707 65%
+        );
+}
+
+.message h2{
+    font-size:clamp(35px,7vw,85px);
+
+    text-transform:uppercase;
+
+    line-height:1;
+}
+
+.message p{
+    margin-top:30px;
+
+    color:#666;
+
+    font-size:11px;
+
+    letter-spacing:4px;
+}
+
+/* ================= JOIN ================= */
+
+.join{
+    min-height:80vh;
+
+    text-align:center;
+
+    background:#0d0d0d;
+}
+
+.join h2{
+    font-size:clamp(40px,7vw,90px);
+
+    text-transform:uppercase;
+}
+
+.join p{
+    margin:25px auto 40px;
+
+    max-width:500px;
+
+    color:#666;
+
+    line-height:1.8;
+}
+
+.form{
+    max-width:500px;
+
+    margin:auto;
+}
+
+.form input{
+    width:100%;
+
+    padding:17px;
+
+    margin-bottom:12px;
+
+    background:#080808;
+
+    border:1px solid #282828;
+
+    color:white;
+
+    outline:none;
+}
+
+.form input:focus{
+    border-color:#9d301b;
+}
+
+.form button{
+    width:100%;
+
+    padding:18px;
+
+    background:#9e2d17;
+
+    color:#fff;
+
+    border:0;
+
+    cursor:pointer;
+
+    font-size:11px;
+
+    letter-spacing:4px;
+
+    text-transform:uppercase;
+
+    transition:.3s;
+}
+
+.form button:hover{
+    background:#c43a1c;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    padding:55px 20px;
+
+    text-align:center;
+
+    background:#030303;
+
+    border-top:1px solid #151515;
+}
+
+footer strong{
+    font-size:20px;
+
+    letter-spacing:5px;
+}
+
+footer p{
+    margin-top:15px;
+
+    color:#333;
+
+    font-size:9px;
+
+    letter-spacing:3px;
+}
+
+.credit{
+    margin-top:22px;
+
+    color:#8f2b18;
+
+    font-size:10px;
+
+    letter-spacing:3px;
+
+    text-transform:uppercase;
+}
+
+/* ================= MUSIC ================= */
+
+.music-control{
+    position:fixed;
+
+    right:25px;
+    bottom:25px;
+
+    z-index:500;
+
+    width:45px;
+    height:45px;
+
+    border-radius:50%;
+
+    background:#111;
+
+    border:1px solid #3a3a3a;
+
+    color:#aaa;
+
+    cursor:pointer;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:15px;
+
+    transition:.3s;
+}
+
+.music-control:hover{
+    border-color:#9d301b;
+
+    color:#fff;
+}
+
+.music-control.playing{
+    border-color:#a52e18;
+
+    color:#d43a1c;
+
+    box-shadow:
+        0 0 20px
+        rgba(160,40,20,.3);
+}
+
+.music-status{
+    position:fixed;
+
+    right:78px;
+    bottom:35px;
+
+    z-index:500;
+
+    color:#555;
+
+    font-size:8px;
+
+    letter-spacing:2px;
+}
+
+/* ================= LOGOUT ================= */
+
+.logout{
+    position:fixed;
+
+    right:25px;
+    bottom:85px;
+
+    z-index:200;
+
+    padding:10px 15px;
+
+    background:#111;
+
+    border:1px solid #292929;
+
+    color:#555;
+
+    font-size:9px;
+
+    letter-spacing:2px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.logout:hover{
+    color:#fff;
+
+    border-color:#8d2b18;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:700px){
+
+    nav{
+        padding:20px;
+    }
+
+    nav div:last-child{
+        display:none;
+    }
+
+    .hero h1{
+        letter-spacing:-6px;
+    }
+
+    section{
+        padding:80px 7%;
+    }
+
+    .rule{
+        gap:15px;
+    }
+
+    .rule-number{
+        min-width:55px;
+    }
+
+    .credit{
+        font-size:9px;
+
+        letter-spacing:2px;
+    }
+
+    .logout{
+        right:15px;
+        bottom:75px;
+    }
+
+    .music-control{
+        right:15px;
+        bottom:20px;
+    }
+
+    .music-status{
+        display:none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     BACKGROUND MUSIC
+====================================================== -->
+
+<audio
+    id="bgMusic"
+    loop
+    preload="auto"
+>
+    <source
+        src="fight-club-theme.mp3"
+        type="audio/mpeg"
+    >
+</audio>
+
+
+<!-- =====================================================
+     LOGIN PAGE
+====================================================== -->
+
+<div id="loginPage">
+
+    <div class="login-box">
+
+        <div class="login-warning">
+            PRIVATE / MEMBERS ONLY
+        </div>
+
+        <div class="login-logo">
+            FIGHT<br>CLUB
+        </div>
+
+        <div class="login-subtitle">
+            ENTER YOUR IDENTITY
+        </div>
+
+        <form
+            class="login-form"
+            onsubmit="login(event)"
+        >
+
+            <input
+                type="text"
+                id="loginUsername"
+                placeholder="USERNAME"
+                autocomplete="off"
+                required
+            >
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="PASSWORD"
+                required
+            >
+
+            <button type="submit">
+                ENTER THE CLUB
+            </button>
+
+        </form>
+
+        <div class="login-note">
+            ANY ID. ANY PASSWORD.<br>
+            NO VERIFICATION. JUST ENTER.
+        </div>
+
+        <div class="login-credit">
+            Built by Bhim Mondal
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MAIN WEBSITE
+====================================================== -->
+
+<div id="mainPage">
+
+    <!-- NAV -->
+
+    <nav>
+
+        <div class="logo">
+            F/C
+        </div>
+
+        <div>
+            <a href="#manifesto">Manifesto</a>
+            <a href="#rules">Rules</a>
+            <a href="#join">Join</a>
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <header class="hero" id="home">
+
+        <div class="hero-content">
+
+            <div class="warning">
+                YOU ARE NOT SUPPOSED TO BE HERE
+            </div>
+
+            <h1>
+                FIGHT<br>
+                CLUB
+            </h1>
+
+            <p>
+                You don't talk about it.<br>
+                You don't explain it.<br>
+                You just show up.
+            </p>
+
+            <!-- FIXED:
+                 ENTER NOW GOES TO MANIFESTO
+                 NOT JOIN
+            -->
+
+            <a
+                href="#manifesto"
+                class="enter"
+            >
+                ENTER
+            </a>
+
+        </div>
+
+        <div class="secret">
+            SOMEONE IS WATCHING
+        </div>
+
+    </header>
+
+
+    <!-- MANIFESTO -->
+
+    <section
+        class="manifesto"
+        id="manifesto"
+    >
+
+        <div class="manifesto-inner">
+
+            <div class="section-label">
+                THE MANIFESTO
+            </div>
+
+            <h2>
+                Stop being<br>
+                <span>comfortable.</span>
+            </h2>
+
+            <p>
+                You are not your job. You are not your bank account.
+                You are not the clothes you wear or the car you drive.
+                Forget the noise. Forget the routine.
+                Find out what you're made of.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- RULES -->
+
+    <section
+        class="rules"
+        id="rules"
+    >
+
+        <div class="section-label">
+            REMEMBER
+        </div>
+
+        <h2>
+            The Rules.
+        </h2>
+
+        <div class="rule-list">
+
+            <div class="rule">
+
+                <div class="rule-number">
+                    01
+                </div>
+
+                <div class="rule-text">
+                    You do not talk about Fight Club.
+                </div>
+
+            </div>
+
+
+            <div class="rule">
+
+                <div class="rule-number">
+                    02
+                </div>
+
+                <div class="rule-text">
+                    You DO NOT talk about Fight Club.
+                </div>
+
+            </div>
+
+
+            <div class="rule">
+
+                <div class="rule-number">
+                    03
+                </div>
+
+                <div class="rule-text">
+                    Two guys per fight.
+                </div>
+
+            </div>
+
+
+            <div class="rule">
+
+                <div class="rule-number">
+                    04
+                </div>
+
+                <div class="rule-text">
+                    One fight at a time.
+                </div>
+
+            </div>
+
+
+            <div class="rule">
+
+                <div class="rule-number">
+                    05
+                </div>
+
+                <div class="rule-text">
+                    Fights go on as long as they have to.
+                </div>
+
+            </div>
+
+
+            <div class="rule">
+
+                <div class="rule-number">
+                    06
+                </div>
+
+                <div class="rule-text">
+                    If this is your first night, you have to fight.
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MESSAGE -->
+
+    <section class="message">
+
+        <div>
+
+            <h2>
+                Lose<br>
+                everything.
+            </h2>
+
+            <p>
+                THEN YOU'LL BE FREE TO DO ANYTHING.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- JOIN -->
+
+    <section
+        class="join"
+        id="join"
+    >
+
+        <div class="section-label">
+            MEMBERS ONLY
+        </div>
+
+        <h2>
+            Are you in?
+        </h2>
+
+        <p>
+            Leave your details. Someone will contact you.
+            Maybe.
+        </p>
+
+        <form
+            class="form"
+            onsubmit="joinClub(event)"
+        >
+
+            <input
+                type="text"
+                id="name"
+                placeholder="YOUR NAME"
+                required
+            >
+
+            <input
+                type="email"
+                id="email"
+                placeholder="YOUR EMAIL"
+                required
+            >
+
+            <button type="submit">
+                I AM IN
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <strong>
+            FIGHT CLUB
+        </strong>
+
+        <p>
+            FIRST RULE. SECOND RULE. YOU KNOW THE REST.
+        </p>
+
+        <div class="credit">
+            Built by Bhim Mondal
+        </div>
+
+    </footer>
+
+
+    <!-- LOGOUT -->
+
+    <button
+        class="logout"
+        onclick="logout()"
+    >
+        LOG OUT
+    </button>
+
+
+    <!-- MUSIC -->
+
+    <div
+        class="music-status"
+        id="musicStatus"
+    >
+        MUSIC OFF
+    </div>
+
+    <button
+        class="music-control"
+        id="musicButton"
+        onclick="toggleMusic()"
+        title="Music"
+    >
+        ♪
+    </button>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   MUSIC
+====================================================== */
+
+const music =
+    document.getElementById("bgMusic");
+
+const musicButton =
+    document.getElementById("musicButton");
+
+const musicStatus =
+    document.getElementById("musicStatus");
+
+music.volume = 0.35;
+
+
+/* Start music */
+
+function startMusic(){
+
+    music.play()
+    .then(function(){
+
+        musicButton.classList.add(
+            "playing"
+        );
+
+        musicStatus.textContent =
+            "MUSIC PLAYING";
+
+    })
+    .catch(function(){
+
+        musicStatus.textContent =
+            "CLICK TO PLAY";
+
+    });
+
+}
+
+
+/* Automatic autoplay attempt */
+
+window.addEventListener(
+    "load",
+    function(){
+
+        startMusic();
+
+    }
+);
+
+
+/* First interaction fallback */
+
+function firstInteraction(){
+
+    if(music.paused){
+
+        startMusic();
+
+    }
+
+    document.removeEventListener(
+        "click",
+        firstInteraction
+    );
+
+    document.removeEventListener(
+        "keydown",
+        firstInteraction
+    );
+
+    document.removeEventListener(
+        "touchstart",
+        firstInteraction
+    );
+
+}
+
+document.addEventListener(
+    "click",
+    firstInteraction
+);
+
+document.addEventListener(
+    "keydown",
+    firstInteraction
+);
+
+document.addEventListener(
+    "touchstart",
+    firstInteraction
+);
+
+
+/* Music button */
+
+function toggleMusic(){
+
+    if(music.paused){
+
+        startMusic();
+
+    }else{
+
+        music.pause();
+
+        musicButton.classList.remove(
+            "playing"
+        );
+
+        musicStatus.textContent =
+            "MUSIC OFF";
+
+    }
+
+}
+
+
+/* =====================================================
+   LOGIN
+====================================================== */
+
+function login(event){
+
+    event.preventDefault();
+
+    const username =
+        document
+        .getElementById("loginUsername")
+        .value
+        .trim();
+
+    const password =
+        document
+        .getElementById("loginPassword")
+        .value;
+
+    /*
+       Any username + any password works.
+    */
+
+    if(
+        username !== "" &&
+        password !== ""
+    ){
+
+        localStorage.setItem(
+            "fightClubUser",
+            username
+        );
+
+        showMainPage();
+
+        startMusic();
+
+    }
+
+}
+
+
+/* =====================================================
+   SHOW MAIN PAGE
+====================================================== */
+
+function showMainPage(){
+
+    document
+        .getElementById("loginPage")
+        .style.display = "none";
+
+    document
+        .getElementById("mainPage")
+        .style.display = "block";
+
+    window.scrollTo(
+        0,
+        0
+    );
+
+}
+
+
+/* =====================================================
+   LOGOUT
+====================================================== */
+
+function logout(){
+
+    localStorage.removeItem(
+        "fightClubUser"
+    );
+
+    document
+        .getElementById("mainPage")
+        .style.display = "none";
+
+    document
+        .getElementById("loginPage")
+        .style.display = "flex";
+
+    document
+        .getElementById("loginUsername")
+        .value = "";
+
+    document
+        .getElementById("loginPassword")
+        .value = "";
+
+    window.scrollTo(
+        0,
+        0
+    );
+
+}
+
+
+/* =====================================================
+   JOIN
+====================================================== */
+
+function joinClub(event){
+
+    event.preventDefault();
+
+    const name =
+        document
+        .getElementById("name")
+        .value;
+
+    alert(
+        "WELCOME, " +
+        name.toUpperCase() +
+        ".\n\n" +
+        "YOU ARE NOW ON THE LIST."
+    );
+
+    event.target.reset();
+
+}
+
+
+/* =====================================================
+   AUTO LOGIN
+====================================================== */
+
+window.addEventListener(
+    "load",
+    function(){
+
+        const savedUser =
+            localStorage.getItem(
+                "fightClubUser"
+            );
+
+        if(savedUser){
+
+            showMainPage();
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
